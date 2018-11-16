@@ -1,0 +1,171 @@
+""""""
+" This is the Plugin part of my VIMRC
+""""""
+
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+""""""""""""""""""""""""""""""""
+" Tools
+""""""""""""""""""""""""""""""""
+
+
+
+""""""""""""""""""""""""""""""""
+" NERDTree
+""""""""""""""""""""""""""""""""
+Plugin 'scrooloose/nerdtree'
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=2
+let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
+let g:nerdtree_tabs_open_on_gui_startup=0
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+""""""""""""""""""""""""""""""""
+" Snippets
+""""""""""""""""""""""""""""""""
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+""""""""""""""""""""""""""""""""
+" Youcompleteme
+""""""""""""""""""""""""""""""""
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_python_binary_path='/usr/bin/python3'
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
+
+"
+""""""""""""""""""""""""""""""""
+" Git
+""""""""""""""""""""""""""""""""
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'mattn/gist-vim'
+
+
+""""""""""""""""""""""""""""""""
+" Docker
+""""""""""""""""""""""""""""""""
+Plugin 'ekalinin/Dockerfile.vim'
+
+""""""""""""""""""""""""""""""""
+" Search
+""""""""""""""""""""""""""""""""
+Plugin 'mileszs/ack.vim'
+" Use 'ag' as ack.vim executable
+let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+
+""""""""""""""""""""""""""""""""
+" Movement
+""""""""""""""""""""""""""""""""
+Plugin 'easymotion/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+map <Leader> <Plug>(easymotion-prefix)
+
+Plugin 'tpope/vim-surround'
+
+""""""""""""""""""""""""""""""""
+" Looks
+""""""""""""""""""""""""""""""""
+Plugin 'godlygeek/tabular'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'spf13/vim-colors'
+Plugin 'bling/vim-bufferline'
+Plugin 'flazz/vim-colorschemes'
+" PowerLine
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_powerline_fonts = 1
+
+""""""""""""""""""""""""""""""""
+" Python
+""""""""""""""""""""""""""""""""
+" Pick either python-mode or pyflakes & pydoc
+"Plugin 'klen/python-mode'
+"Plugin 'yssource/python.vim'
+"Plugin 'python_match.vim'
+"Plugin 'pythoncomplete'
+
+""""""""""""""""""""""""""""""""
+" Programming Help
+""""""""""""""""""""""""""""""""
+Plugin 'vim-scripts/cscope_macros.vim'
+
+Plugin 'scrooloose/syntastic'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_mri_args = "--config=$HOME/.jshintrc"
+"
+let g:syntastic_python_checkers = [ 'flake8', 'python' ]
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+let python_highlight_all=1
+
+"let g:syntastic_yaml_checkers = ['jsyaml']
+"let g:syntastic_html_tidy_exec = 'tidy5'
+let g:syntastic_cpp_checkers = ['gnu']
+
+Plugin 'majutsushi/tagbar'
+Plugin 'soramugi/auto-ctags.vim'
+Plugin 'erig0/cscope_dynamic'
+Plugin 'tpope/vim-commentary'
+Plugin 'ludovicchabant/vim-gutentags'
+
+""""""""""""""""""""""""""""""""
+" Markdown
+""""""""""""""""""""""""""""""""
+Plugin 'plasticboy/vim-markdown'
+
+""""""""""""""""""""""""""""""""
+" Plugins to check out in future
+""""""""""""""""""""""""""""""""
+" Plugin 'tpope/vim-repeat'
+" Plugin 'rhysd/conflict-marker.vim'
+" Plugin 'jiangmiao/auto-pairs'
+" Plugin 'vim-scripts/sessionman.vim'
+" Plugin 'matchit.zip'
+" Plugin 'luochen1990/rainbow'
+" Plugin 'mbbill/undotree'
+" Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'mhinz/vim-signify'
+" Plugin 'tpope/vim-abolish.git'
+" Plugin 'osyo-manga/vim-over'
+" Plugin 'kana/vim-textobj-user'
+" Plugin 'kana/vim-textobj-indent'
+" Plugin 'gcmt/wildfire.vim'
+" Plugin 'jistr/vim-nerdtree-tabs'
+
+call vundle#end()
+" Vundle End
+
+
