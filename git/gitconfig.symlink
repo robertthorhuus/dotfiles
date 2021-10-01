@@ -1,0 +1,128 @@
+[user]
+	name = Robert Thorhuus
+	email = robert.thorhuus@gmail.com
+
+[includeIf "gitdir:~/Documents/work/"]
+    path = ~/Documents/work/.gitconfig
+
+[merge]
+	keepBackup = false
+	tool = vimdiff
+	conflictstyle = diff3
+
+[gerrit]
+	createchangeid = true
+
+[alias]
+	parent = rev-parse --abbrev-ref --symbolic-full-name @{u}
+	last = log -1 HEAD
+	remotes = remote -v
+	syncu = !sh ~/.dotfiles/git/sync_with_upstream.sh
+	diffall = !sh ~/.dotfiles/git/git_unpushed.sh
+	plog = !sh ~/.dotfiles/git/plog.sh
+	lazy = !lazygit
+	contributors = shortlog --summary --numbered
+	amend = commit --amend --reuse-message=HEAD
+	br = branch
+	ci = commit
+	co = checkout
+	df = diff --word-diff
+	g = grep --break --heading --line-number
+
+	# LOG ALIASES
+	l1 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	l2 = "!sh -c \"git log --since '${1:-1} days ago' --oneline --author $(git config user.email)\" -"
+	l3 = log --pretty=oneline --graph --abbrev-commit
+	l4 = log --graph --decorate --pretty=oneline --abbrev-commit
+	l5 = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
+	l6 = log --pretty=format:'* %s (%h)'
+	l7 = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	l8 = log --tags --simplify-by-decoration
+
+	patch = !git --no-pager diff --no-color
+	p = push
+	pf = push --force
+	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	show-ignored = "! git clean -ndX | perl -pe 's/Would remove/Ignored:/'"
+	st = status
+	stl = ls-files -m -o --exclude-standard
+	sts = status -sb
+	unstage = reset --hard HEAD
+	aliases = config --get-regexp alias
+	amend = commit --amend --reuse-message=HEAD
+	branches = branch -a
+	s = status -s
+	tags = tag -l
+	whoami = config user.email
+	sub = submodule
+	set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+	ltag = describe --tags --abbrev=0
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	plain = 240
+	whitespace = 216 reverse
+	func = 146 bold
+	commit = yellow bold
+[color "status"]
+	header = 240
+	branch = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	filemode = false
+	trustctime = false
+	autocrlf = input
+	untrackedCache = true
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	ignorecase = false
+	
+[credential]
+	helper = store --file ~/.git-credentials
+	helper = cache --timeout 100000
+
+[apply]
+        whitespace = nowarn
+
+[mergetool]
+        keepBackup = false
+
+[difftool]
+        prompt = false
+
+[help]
+        autocorrect = 1
+
+[push]
+	default = simple
+
+[grep]
+	lineNumber = true
+
+[help]
+	autocorrect = 1
+
+[format]
+  pretty = %C(auto)%h%Creset -%C(auto)%d%Creset %s %C(blue)<%an> %Cgreen(%cr)%Creset
+

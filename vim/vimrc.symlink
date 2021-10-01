@@ -1,0 +1,303 @@
+set nocompatible
+filetype off
+
+"source ~/.vim/vimrc.first
+source ~/.vim/vimrc.bundles
+
+set rtp+=/usr/lib/python2.7/dist-packages/powerline/bindings/vim
+
+"""""""""""""""""""""""""
+" Settings
+"""""""""""""""""""""""""
+filetype plugin indent on
+set history=1000
+set autoread
+set clipboard=unnamed
+set tabstop=4
+set shiftwidth=4
+set backspace=2
+set nobackup
+set nowritebackup
+set noswapfile
+set showcmd
+set showmode
+set autoindent
+set wildmenu
+set wildmode=list:longest
+set novisualbell
+set noerrorbells
+set t_vb=
+set tm=500
+set showmatch
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set number
+set rnu
+set ttyfast
+set termencoding=utf-8
+syntax on
+set encoding=utf-8
+set laststatus=2
+set lazyredraw
+set splitbelow
+set splitright
+set title
+set linebreak
+set path+=**
+set autochdir
+set tags+=./tags;
+
+""""""""""""""""""""""""""""""
+" Apperance
+""""""""""""""""""""""""""""""
+set t_Co=256
+set background=dark
+colorscheme badwolf
+"let g:airline_theme='molokai'
+set cursorline
+"hi CursorLine cterm=underline ctermbg=none ctermfg=none
+set cc=80
+"hi ColorColumn ctermbg=red
+set list
+set listchars=""
+set listchars=eol:+
+set listchars+=tab:>-
+"hi StatusLine cterm=none ctermbg=black ctermfg=white
+"hi StatusLineNC cterm=none ctermbg=black ctermfg=white
+"hi bufferline_selected cterm=none ctermbg=black ctermfg=white
+
+" Whitespaces
+" highlight ExtraWhitespace ctermbg=red guibg=red
+" match ExtraWhitespace /\s\+$/
+" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" autocmd BufWinLeave * call clearmatches()
+
+"""""""""""""""""""
+" Key Mappings
+"""""""""""""""""""
+" Learn
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+command W w
+command Wq wq
+command WQ wq
+command Q q
+
+map <c-h> <c-w>h
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+
+" LEADER
+let mapleader = ","
+vnoremap <Leader>s :sort<CR>
+nnoremap <Leader>b :TagbarToggle<CR>
+nnoremap <Leader>p  :CtrlP<CR>
+nnoremap <Leader>.  :CtrlPTag<CR>
+nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+set errorformat=%A%f:%l:\ %m,%C%m
+noremap <M-1> :w<CR>:set ch=5<CR>:make -d C:\\dev\\classes %:p<CR>
+noremap <M-2> :cp<CR>
+noremap <M-3> :cn<CR>
+noremap <M-4> :cl<CR>
+
+nnoremap <silent> <F10> :bn<CR>
+nnoremap <silent> <S-F10> :bp<CR>
+
+
+" Auto-install vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""
+" PLUGINS
+""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""
+
+call plug#begin('~/.vim/plugged')
+
+""""""""""""""""""""""""""""""""
+" NERDTree
+""""""""""""""""""""""""""""""""
+Plug 'scrooloose/nerdtree'
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=2
+let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
+let g:nerdtree_tabs_open_on_gui_startup=0
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+""""""""""""""""""""""""""""""""
+" Snippets
+""""""""""""""""""""""""""""""""
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<§>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+""""""""""""""""""""""""""""""""
+" Youcompleteme
+""""""""""""""""""""""""""""""""
+Plug 'ycm-core/YouCompleteMe', { 'do':'./install.py' }
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_completion=1
+" let g:loaded_youcompleteme = 1
+let g:ycm_python_binary_path='python3'
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_semantic_triggers = { 'python': [ 're!.' ] }
+" Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+" " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+let g:ycm_clangd_binary_path = exepath("clangd")
+"
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+
+"
+""""""""""""""""""""""""""""""""
+" Git
+""""""""""""""""""""""""""""""""
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mattn/gist-vim'
+
+
+""""""""""""""""""""""""""""""""
+" Docker
+""""""""""""""""""""""""""""""""
+Plug 'ekalinin/Dockerfile.vim'
+
+""""""""""""""""""""""""""""""""
+" Search
+""""""""""""""""""""""""""""""""
+Plug 'mileszs/ack.vim'
+" Use 'ag' as ack.vim executable
+let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+
+""""""""""""""""""""""""""""""""
+" Movement
+""""""""""""""""""""""""""""""""
+Plug 'easymotion/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+map <Leader> <Plug>(easymotion-prefix)
+
+Plug 'tpope/vim-surround'
+
+""""""""""""""""""""""""""""""""
+" Looks
+""""""""""""""""""""""""""""""""
+Plug 'godlygeek/tabular'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'spf13/vim-colors'
+Plug 'bling/vim-bufferline'
+Plug 'flazz/vim-colorschemes'
+" PowerLine
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_powerline_fonts = 1
+
+""""""""""""""""""""""""""""""""
+" Python
+""""""""""""""""""""""""""""""""
+" Pick either python-mode or pyflakes & pydoc
+"Plug 'klen/python-mode'
+"Plug 'yssource/python.vim'
+"Plug 'python_match.vim'
+"Plug 'pythoncomplete'
+Plug 'Vimjas/vim-python-pep8-indent'
+
+""""""""""""""""""""""""""""""""
+" Programming Help
+""""""""""""""""""""""""""""""""
+Plug 'vim-scripts/cscope_macros.vim'
+
+Plug 'scrooloose/syntastic'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_mri_args = "--config=$HOME/.jshintrc"
+"
+let g:syntastic_python_checkers = [ 'flake8', 'python' ]
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+let python_highlight_all=1
+let g:syntastic_python_flake8_args='--ignore=E128,E126'
+"let g:syntastic_yaml_checkers = ['jsyaml']
+"let g:syntastic_html_tidy_exec = 'tidy5'
+let g:syntastic_cpp_checkers = ['gnu']
+
+Plug 'majutsushi/tagbar'
+Plug 'soramugi/auto-ctags.vim'
+Plug 'erig0/cscope_dynamic'
+Plug 'tpope/vim-commentary'
+Plug 'ludovicchabant/vim-gutentags'
+
+""""""""""""""""""""""""""""""""
+" Markdown
+""""""""""""""""""""""""""""""""
+Plug 'plasticboy/vim-markdown'
+
+""""""""""""""""""""""""""""""""
+" Plug to check out in future
+""""""""""""""""""""""""""""""""
+" Plug 'tpope/vim-repeat'
+" Plug 'rhysd/conflict-marker.vim'
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'vim-scripts/sessionman.vim'
+" Plug 'matchit.zip'
+" Plug 'luochen1990/rainbow'
+" Plug 'mbbill/undotree'
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'mhinz/vim-signify'
+" Plug 'tpope/vim-abolish.git'
+" Plug 'osyo-manga/vim-over'
+" Plug 'kana/vim-textobj-user'
+" Plug 'kana/vim-textobj-indent'
+" Plug 'gcmt/wildfire.vim'
+" Plug 'jistr/vim-nerdtree-tabs'
+
+" NERD FONTS (NEED TO BE LAST)
+"""""""""""""""""""""""""""""""
+Plug 'ryanoasis/vim-devicons'
+
+
+call plug#end()
+

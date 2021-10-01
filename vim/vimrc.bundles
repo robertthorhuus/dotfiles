@@ -37,7 +37,7 @@ Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<§>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -49,9 +49,12 @@ let g:UltiSnipsEditSplit="vertical"
 " Youcompleteme
 """"""""""""""""""""""""""""""""
 Plugin 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_python_binary_path='/usr/bin/python3'
+" let g:loaded_youcompleteme = 1
+let g:ycm_python_binary_path='python3'
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_semantic_triggers = { 'python': [ 're!.' ] }
 "
 "Plugin 'SirVer/ultisnips'
 "Plugin 'honza/vim-snippets'
@@ -110,6 +113,7 @@ let g:airline_powerline_fonts = 1
 "Plugin 'yssource/python.vim'
 "Plugin 'python_match.vim'
 "Plugin 'pythoncomplete'
+Plugin 'Vimjas/vim-python-pep8-indent'
 
 """"""""""""""""""""""""""""""""
 " Programming Help
@@ -130,7 +134,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = [ 'flake8', 'python' ]
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let python_highlight_all=1
-
+let g:syntastic_python_flake8_args='--ignore=E128,E126'
 "let g:syntastic_yaml_checkers = ['jsyaml']
 "let g:syntastic_html_tidy_exec = 'tidy5'
 let g:syntastic_cpp_checkers = ['gnu']
